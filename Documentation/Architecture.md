@@ -6,7 +6,7 @@ Implementation of Medallion Architecture in Microsoft Fabric for IBM financial d
 
 ## Bronze Layer (Raw Data)
 **Purpose:** To store raw, unprocessed data.
-Used Vantage API to retrieve data from the stock market and store it in a file within a lakehouse
+I used Vantage API to retrieve data from the stock market and store it in a file within a lakehouse
 
 ![](../Screenshots/fileinLakehouse.png)
 
@@ -15,5 +15,5 @@ Used Vantage API to retrieve data from the stock market and store it in a file w
 ![](../Screenshots/lakehouse-tables.png)
 
 ## Gold Layer
-**Purpose:** To store enriched data ready for Power BI dashboards
+**Purpose:** To store enriched data ready for Power BI dashboards, in the following image we can see the cleand and enriched data in a structured table in the gold data warehouse
 ![](../Screenshots/WH-Table.png)

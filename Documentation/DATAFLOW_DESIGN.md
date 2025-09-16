@@ -19,3 +19,5 @@ let
         each ([close] - [previous_close]) / [previous_close] * 100, type number)
 in
     AddDailyReturn
+```
+asdasd

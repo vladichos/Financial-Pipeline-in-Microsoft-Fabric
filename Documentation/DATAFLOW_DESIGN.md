@@ -15,9 +15,40 @@ First we create an index in order to compute the addedd columns after, this beca
 **Formula:**
 Return (%) = [(Current Close - Previous Close) / Previous Close] × 100
 
-**Implementation:**
+**DAX code:**
 ```powerquery
 try (([close] - #"Added index"[close]{[Index]-1}) / (#"Added index"[close]{[Index]-1}))*100 otherwise null
 ```
-asdasd
 
+
+### Simple moving AVG 5
+**Purpose:** Smooth price data to identify trends.
+
+**Formula:**
+SMA5 = (Price_t + Price_{t-1} + Price_{t-2} + Price_{t-3} + Price_{t-4}) / 5
+
+**DAX code:**
+```powerquery
+try ([close] + #"Added index"[close]{[Index]-1} + #"Added index"[close]{[Index]-2} + #"Added index"[close]{[Index]-3} + #"Added index"[close]{[Index]-4})/5 otherwise null
+```
+### Volatility
+**Purpose:** Measure price risk using standard deviation of returns.
+
+**Formula:**
+Volatility = STDEV(Returns last 5 periods)
+
+**DAX code:**
+```powerquery
+try List.StandardDeviation({ #"Added index"[close]{[Index]-4}, #"Added index"[close]{[Index]-3}, #"Added index"[close]{[Index]-2}, #"Added index"[close]{[Index]-1}, [close] }) otherwise null
+```
+
+### Volume Ratio
+**Purpose:** Compare current volume against 5-period average.
+
+**Formula:**
+Volume Ratio = Current Volume / 5-Period Average Volume
+
+**DAX code:**
+```powerquery
+try [volume] / List.Average({ #"Added index"[volume]{[Index]-4}, #"Added index"[volume]{[Index]-3}, #"Added index"[volume]{[Index]-2}, #"Added index"[volume]{[Index]-1}, #"Added index"[volume]{[Index]} }) otherwise null
+```

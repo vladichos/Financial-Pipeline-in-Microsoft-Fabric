@@ -1,7 +1,8 @@
 # Architecture Design
 
 ## Overview
-Implementation of Medallion Architecture in Microsoft Fabric for IBM financial data processing.
+Implementation of Medallion Architecture in Microsoft Fabric for IBM financial data processing, I used the following diagram in order to implement the design with only one key difference, the bronce and silver layer belong to a lakehouse and the gold layer belongs to a warehouse.
+![](../Screenshots/architecture-diagram.png)
 
 ## Bronze Layer (Raw Data)
 **Purpose:** To store raw, unprocessed data.
@@ -12,3 +13,7 @@ Used Vantage API to retrieve data from the stock market and store it in a file w
 ## Silver Layer
 **Purpose:** To clean, adjust the data and store it in a delta table format in the same lakehouse.
 ![](../Screenshots/lakehouse-tables.png)
+
+## Gold Layer
+**Purpose:** To store enriched data ready for Power BI dashboards
+![](../Screenshots/WH-Table.png)

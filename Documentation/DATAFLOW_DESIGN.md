@@ -52,3 +52,10 @@ Volume Ratio = Current Volume / 5-Period Average Volume
 ```powerquery
 try [volume] / List.Average({ #"Added index"[volume]{[Index]-4}, #"Added index"[volume]{[Index]-3}, #"Added index"[volume]{[Index]-2}, #"Added index"[volume]{[Index]-1}, #"Added index"[volume]{[Index]} }) otherwise null
 ```
+
+## Adicional Notes
+
+- First 4 periods return null for 5-period calculations
+- Skip periods with null or zero values
+- Calculations optimized for incremental processing
+- Use Round function for prices

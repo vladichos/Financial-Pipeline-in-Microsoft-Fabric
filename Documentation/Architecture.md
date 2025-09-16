@@ -8,3 +8,7 @@ Implementation of Medallion Architecture in Microsoft Fabric for IBM financial d
 Used Vantage API to retrieve data from the stock market and store it in a file within a lakehouse
 
 ![](../Screenshots/fileinLakehouse.png)
+
+## Silver Layer
+**Purpose:** To clean, adjust the data and store it in a delta table format in the same lakehouse.
+![](../Screenshots/lakehouse-tables.png)

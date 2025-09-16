@@ -1,7 +1,9 @@
 # Dataflow Design
 
 ## Overview
-The primary purpose of the dataflow gen2 is to transform data as it moves it from one place to another, so since the data is being moved from the lakehouse to the gold warehouse, there's going to be heavy transformations in it but in this section im not going to go deep into DAX code, you can refer to the Code folder for that part.
+The primary purpose of the dataflow gen2 is to transform data as it moves it from one place to another, so since the data is being moved from the lakehouse to the gold warehouse, there's going to be heavy transformations in it but in this section im not going to go deep into DAX code, you can refer to the Code folder for that part, the folllowing image shows all the new columns and steps performed in the dataflow.
+![](../Screenshots/dataflow-gen2-design.png)
+
 
 ### Index
 First we create an index in order to compute the addedd columns after, this because we need to track previous rows in future calculations.

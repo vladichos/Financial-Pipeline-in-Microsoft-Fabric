@@ -1,7 +1,7 @@
 # Dataflow Design
 
 ## Overview
-The primary purpose of the dataflow gen2 is to transform data as it moves it from one place to another, so since the data is being moved from the lakehouse to the gold warehouse, there's going to be heavy transformations in it but in this section im not going to go deep into DAX code, you can refer to the Code folder for that part, the folllowing image shows all the new columns and steps performed in the dataflow.
+The primary purpose of the dataflow gen2 is to transform data as it moves it from one place to another, so since the data is being moved from the lakehouse to the gold warehouse, there's going to be heavy transformations in it but in this section so the DAX code is provided as well. The folllowing image shows all the new columns and steps performed in the dataflow.
 
 ![](../Screenshots/dataflow-gen2-design.png)
 
@@ -9,18 +9,15 @@ The primary purpose of the dataflow gen2 is to transform data as it moves it fro
 ### Index
 First we create an index in order to compute the addedd columns after, this because we need to track previous rows in future calculations.
 
-### Daily Return Percentage
+### Return Percentage
 **Purpose:** Measure the daily price change as a percentage.
+
+**Formula:**
+Return (%) = [(Current Close - Previous Close) / Previous Close] × 100
+
 **Implementation:**
 ```powerquery
-// Calculate Daily Return Percentage
-let
-    Source = #"Sorted Data",
-    AddPreviousClose = Table.AddColumn(Source, "previous_close", 
-        each [close]_{n-1}, type number),
-    AddDailyReturn = Table.AddColumn(AddPreviousClose, "daily_return_pct", 
-        each ([close] - [previous_close]) / [previous_close] * 100, type number)
-in
-    AddDailyReturn
+try (([close] - #"Added index"[close]{[Index]-1}) / (#"Added index"[close]{[Index]-1}))*100 otherwise null
 ```
 asdasd
+
